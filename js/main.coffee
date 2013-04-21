@@ -2,16 +2,16 @@ autoTime = 233
 
 moveToButton = ->
   $('#fake_mouse').animate(
-    top: $('#search_button').position().top + 5,
-    left: $('#search_button').position().left+15,
+    top: $('#search_button').offset().top + 5,
+    left: $('#search_button').offset().left + 15,
     500, ->
-      #location.href = $('#search').attr('action') + '?' + $('#search').formSerialize()
+      location.href = $('#search').attr('action') + '?' + $('#search').formSerialize()
   )
 
 moveToText = ->
   $('#fake_mouse').animate(
-    top: $("#search_query").position().top + 5,
-    left: $("#search_query").position().left,
+    top: $("#search_query").offset().top + $('#search_query').height() / 2,
+    left: $("#search_query").offset().left,
     2000, ->
       $("#search_query").focus()
   )
@@ -22,7 +22,7 @@ moveToRandom = (str)->
     top:"+=5px",
     left:"+=10px",
     "fast", ->
-      autoInput(stemp,0)
+      autoInput(stemp, 0)
   )
 
 switchMouseCursor = ->
@@ -37,7 +37,7 @@ autoInput = (str,index) ->
   $("#search_query").attr("value",val)
   if index < str.length
     setTimeout(
-      -> autoInput(str,index+1),
+      -> autoInput(str, index+1),
       Math.random()*autoTime
     )
   else
@@ -52,8 +52,8 @@ $(document).ready ->
   if wd = $.url().param 's'
     #access with a query
     $('#fake_mouse').show()
-    switchMouseCursor()
-    $('#search').ready ->
+    $('#search_query').ready ->
+      switchMouseCursor()
       moveToText()
       moveToRandom(wd)
   else

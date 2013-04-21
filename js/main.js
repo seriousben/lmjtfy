@@ -6,15 +6,17 @@
 
   moveToButton = function() {
     return $('#fake_mouse').animate({
-      top: $('#search_button').position().top + 5,
-      left: $('#search_button').position().left + 15
-    }, 500, function() {});
+      top: $('#search_button').offset().top + 5,
+      left: $('#search_button').offset().left + 15
+    }, 500, function() {
+      return location.href = $('#search').attr('action') + '?' + $('#search').formSerialize();
+    });
   };
 
   moveToText = function() {
     return $('#fake_mouse').animate({
-      top: $("#search_query").position().top + 5,
-      left: $("#search_query").position().left
+      top: $("#search_query").offset().top + $('#search_query').height() / 2,
+      left: $("#search_query").offset().left
     }, 2000, function() {
       return $("#search_query").focus();
     });
@@ -69,8 +71,8 @@
 
     if (wd = $.url().param('s')) {
       $('#fake_mouse').show();
-      switchMouseCursor();
-      return $('#search').ready(function() {
+      return $('#search_query').ready(function() {
+        switchMouseCursor();
         moveToText();
         return moveToRandom(wd);
       });
