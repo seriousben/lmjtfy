@@ -2,18 +2,18 @@ autoTime = 233
 
 moveToButton = ->
   $('#fake_mouse').animate(
-    top: $('#su').position().top + 5,
-    left: $('#su').position().left+15,
+    top: $('#search_button').position().top + 5,
+    left: $('#search_button').position().left+15,
     500, ->
-      location.href = $('#search').attr('action') + '?' + $('#search').formSerialize()
+      #location.href = $('#search').attr('action') + '?' + $('#search').formSerialize()
   )
 
 moveToText = ->
   $('#fake_mouse').animate(
-    top: $("#kw").position().top + 5,
-    left: $("#kw").position().left,
+    top: $("#search_query").position().top + 5,
+    left: $("#search_query").position().left,
     2000, ->
-      $("#kw").focus()
+      $("#search_query").focus()
   )
 
 moveToRandom = (str)->
@@ -34,7 +34,7 @@ switchMouseCursor = ->
 
 autoInput = (str,index) ->
   val = str.substr(0,index + 1)
-  $("#kw").attr("value",val)
+  $("#search_query").attr("value",val)
   if index < str.length
     setTimeout(
       -> autoInput(str,index+1),
@@ -43,18 +43,24 @@ autoInput = (str,index) ->
   else
     moveToButton()
 
+search_submitted = ->
+  $('#search_query').value = _.string.trim($('#search_query').val())
+  if $('#search_query').val()
+    $("#search_url").html location.href + '?s=' + $('#search_query').val()
+
 $(document).ready ->
   if wd = $.url().param 's'
     #access with a query
     $('#fake_mouse').show()
     switchMouseCursor()
-    $('#su').ready ->
+    $('#search').ready ->
       moveToText()
       moveToRandom(wd)
   else
     #access directly, without a query
     $('#search').submit ->
-      @kw.value = _.string.trim(@kw.value)
-      if @kw.value
-        $("#search_url").html location.href + '?s=' + $('#kw').val()
+      search_submitted()
+      false
+    $('#search_button').click ->
+      search_submitted()
       false

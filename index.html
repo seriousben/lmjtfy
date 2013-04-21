@@ -7,33 +7,38 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
 
-<!--     <link rel="stylesheet" href="css/normalize.css"> -->
-    <link rel="stylesheet" href="css/main.css">
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
   </head>
   <body>
-    <img id="fake_mouse" src="" style="display:none;position:relative" />
-    <br />
-    <br />
-    <br />
-    <br />
-    <img src="http://www.atlassian.com/en/wac/software/jira/overview/productLogo/imageBinary/jira_logo_landing.png"/>
-    <form id="search" name="f" action="http://jira/secure/QuickSearch.jspa" class="canvas">
-      <span class="s_ipt_wr">
-        <input type="text" name="searchString" id="kw" maxlength="100" class="s_ipt" autocomplete="off" style="background-image: none; background-position: 0% 0%; background-repeat: repeat repeat;">
-      </span>
-      <span class="s_btn_wr">
-        <input type="submit" value="Let Me Jira That For You!" id="su" class="s_btn" onmousedown="this.className='s_btn s_btn_h'" onmouseout="this.className='s_btn'">
-      </span>
-      
-      <h5 id="search_url" style="text-decoration:underline;"></h5>
-      <a href="https://goo.gl/">Shorten it!</a>
-    </form>
+    <div class="container">
+      <div class="row">
+        <div class="offset4 span4">
+          <br/>
+          <br/>
+          <br/>
+          <div class="row">
+            Let Me <img src="http://www.atlassian.com/en/wac/software/jira/overview/productLogo/imageBinary/jira_logo_landing.png"/> That For You!
+          </div>
 
+          <div class="row">
+            <img id="fake_mouse" src="" style="display:none;position:absolute;z-index=10000;" />
+            <form id="search" action="http://jira/secure/QuickSearch.jspa" class="input-append">
+              <input type="text" name="searchString" id="search_query"  class="" maxlength="100" autocomplete="off">
+              <button id="search_button" class="btn" type="button">Go!</button>
+
+              <h5 id="search_url" style="text-decoration:underline;"></h5>
+              <a href="https://goo.gl/">Shorten it!</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
     <script src="js/vendor/jquery-1.8.3.min.js"></script>
     <script src="js/vendor/jquery.form.js"></script>
     <script src="js/vendor/underscore.string.min.js"></script>
     <script src="js/vendor/purl.js"></script>
     <script src="js/plugins.js"></script>
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>
